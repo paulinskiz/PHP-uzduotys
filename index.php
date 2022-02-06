@@ -423,7 +423,7 @@ if ($arrayAvg > $middle) {
 }
 
 // 31. 
-
+echo '<br> <b>Trisdešimt pirmas</b> <br>';
 
 
 
