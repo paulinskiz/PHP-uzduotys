@@ -422,17 +422,137 @@ if ($arrayAvg > $middle) {
     echo 'Vidurkis yra lygus vidurinei reikšmei.';
 }
 
-// 31. 
+// 31. Parašykite funkciją, kurios argumentas būtų tekstas, kuris yra įterpiamas į h1 tagą. 
 echo '<br> <b>Trisdešimt pirmas</b> <br>';
 
+function h1 (string $string) {
+    return "<h1>$string</h1>";
+}
+
+// 32. Parašyti funkciją, kuri priima du kintamuosius. Patikrina ar jie yra skaičiai. Grąžina tų skaičių sumą.
+echo '<br> <b>Trisdešimt antras</b> <br>';
+
+function sum ($a, $b) {
+    if (is_numeric($a) && is_numeric($b)) {
+        return $a+$b;
+    }   else {
+        return 'ERROR - Input is not a number';
+    }
+}
+
+// 33. Parašyti funkciją, kuri priima du kintamuosius. Patikrina ar jie yra skaičiai. Palygina tuos du skaičius ir grąžina rezultatą ar pirmas skaičius yra didesnis, ar antras, ar jie yra lygūs.
+echo '<br> <b>Trisdešimt trečias</b> <br>';
+
+function compare ($a, $b) {
+    if (is_numeric($a) && is_numeric($b)) {
+        if ($a>$b) {
+            return 'First number is bigger than second number.';
+        } elseif ($a<$b) {
+            return 'Second number is bigger than first number.';
+        } else {
+            return 'Both numbers are equal.';
+        }
+    }   else {
+        return 'ERROR - Input is not a number';
+    }
+}
+
+// 34. Parašyti funkciją, kuri priimtų vieną kintamajį. Turi patikrinti ar tai yra skaičiu ir ar tai yra keturženklis skaičius. Turi būti grąžinamas rezultatas ar tie metai yra keliemieji.
+echo '<br> <b>Trisdešimt ketvirtas</b> <br>';
+
+function leapYear ($a) {
+    if (is_numeric($a) && strlen($a)==4) {
+        if ($a%400 == 0 || $a%100!=0 && $a%4==0) {
+            return 'Leap year';
+        } else {
+            return 'Common year';
+        }
+    } else {
+        return 'Input must be 4 digits number';
+    }
+}
+
+// 35. Parašyti funkciją, kuri priimtų vieną kintamajį. Turi būti patikrinimas ar tas kintamasis yra skaičius. Funkcija turi grąžinti skaičių, kur įvesto skaičiaus skaitmenys būtų išrikiuoti didėjimo tvarka.
+echo '<br> <b>Trisdešimt penktas</b> <br>';
 
 
+function ascending ($a) {
+    if (is_numeric($a)) {
+        $temp = str_split($a);
+        sort($temp);
+        $sorted = '';
+        for ($i=0; $i<count($temp); $i++){
+            $sorted[$i]=$temp[$i];
+        }
+        return $sorted;
+    }   else {
+        return 'ERROR - Input is not a number';
+    }
+}
 
+// 36. Parašykite funkciją, kuri skaičiuotų, iš kiek sveikų skaičių jos argumentas dalijasi be liekanos (išskyrus vienetą ir patį save) Argumentą užrašykite taip, kad būtų galima įvesti tik sveiką skaičių.
+echo '<br> <b>Trisdešimt šeštas</b> <br>';
 
+function divisions($a) {
+    if (is_int($a)) {
+        $count=0;
+        for ($i=2; $i<$a; $i++) {
+            if ($a%$i==0) {
+                $count++;
+            }
+        }
+        return "Number can be devided $count times";
+    } else {
+        return 'ERROR - Input is not a natural number';
+    }
+}
 
+// 37. Parašyti funkciją telefonoNumeris, kuri priima vieną kintamąjį. Turi būti patikrinimas, kad kintamasis yra masyvas, kad jo visi elementai yra skaičiai ir, kad jo ilgis yra 10. Funkcija turi grąžinti telefono numerį tokiu formatu - "(XXX) XXX-XXXX".
+echo '<br> <b>Trisdešimt septintas</b> <br>';
 
+function number ($a) {
+    if (is_array($a) && count($a)==10) {
+        foreach ($a as $value) {
+            if (!is_int($value)) {
+                return 'ERROR - Input must be array with 10 numbers';
+            }
+        }
+        $temp1 = '';
+        $temp2 = '';
+        $temp3 = '';
+        for ($i=0; $i<10; $i++) {
+            if ($i<3){
+                $temp1[$i]=$a[$i];
+            } elseif ($i<6){
+                $temp2[$i]=$a[$i];
+            } else {
+                $temp3[$i]=$a[$i];
+            }
+        }
+        $number = "($temp1) $temp2-$temp3";
+        return $number; 
+    } else {
+        return 'ERROR - Input must be array with 10 numbers';
+    }
+}
 
+// 38. Parašyti funkciją pirminisSkaicius. Funkcija turi vieną kintamąjį. Turi būti patikrinimas, kad kintamasis yra skaičius. Funkcija turi grąžinti ar pateiktas skaičius yra pirminis( pirminis skaičius yra tas, kuris dalinasi tik iš savęs ir tik iš vieneto be liekanos.)
+echo '<br> <b>Trisdešimt aštuntas</b> <br>';
 
+function prime ($a) {
+    if (is_int($a)) {
+        if ($a<2) {
+            return 'Number is not a prime';
+        } else {
+            for ($i=2; $i<$a; $i++) {
+                if ($a%$i==0) {
+                    return 'Number is not a prime';
+                }
+            }
+            return 'Number is prime';
+        }
+    }
+}
 
 
 ?>
