@@ -352,8 +352,6 @@ foreach ($arr7 as $array){
 
 
 // 28. Sugeneruoti masyvą, kurio ilgis 100, o reikšmės – masyvai, kurių ilgis 10, o reikšmės atsitiktiniai skaičiai nuo 1 iki 17. Perrikiuoti vidinius masyvus pagal vidinių masyvų reikšmių sumas didėjančia tvarka.
-
-// Reikia taisyti !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 echo '<br> <b>Dvidešimt aštuntas</b> <br>';
 $arr8 = [];
 for ($i=0; $i<100; $i++) {
@@ -361,31 +359,16 @@ for ($i=0; $i<100; $i++) {
         $arr8[$i][$j]=rand(1, 17);
     }
 } 
-$summed = [];
-foreach ($arr8 as $array) {
-    array_push($summed, array_sum($array));
+
+for ($i = 0; $i < count($arr8); ++$i){
+    for($j = 0; $j < count($arr8); ++$j){
+        if (array_sum($arr8[$i]) < array_sum($arr8[$j])){
+            $temp = $arr8[$i];
+            $arr8[$i] = $arr8[$j];
+            $arr8[$j] = $temp;
+        }
+    }
 }
-sort($summed);
-$sorted2 = [];
-// foreach ($summed as $sum) {
-//     foreach ($arr8 as $array) {
-//         if ($sum == count($array)) {
-//             array_push($sorted2, $array);
-//         }
-//     }
-// }
-
-// for ($i=0; $i<count($summed); $i++){
-//     foreach ($arr8 as $array) {
-//         if ($summed[$i]==array_sum($array)) {
-//             array_push($sorted2, $array);
-//         }
-//     }
-// }
-
-// echo '<pre>';
-// print_r($sorted2);
-
 
 // 29. Sugeneruoti masyvą, kurio ilgis 100, o reikšmės – masyvai, kurių ilgis 10, o reikšmės atsitiktiniai skaičiai nuo 1 iki 17. Iš dvimačio masyvo sukurti vieną vienmatį masyvą – visas dvimačio masyvo masyvų reikšmes perkelti į naują masyvą.
 echo '<br> <b>Dvidešimt devintas</b> <br>';
@@ -554,5 +537,229 @@ function prime ($a) {
     }
 }
 
+// 39. Parašyti funkciją - lygineSuma. Funkcijos parametrai - du kintamieji. Testų reikalavimai - abu kitamieji turi būti arba skaičiai arba masyvai(negali būti vienas skaičius, kitas masyvas). Jei kintamieji skaičiai, grąžinti skaičių sumą, jei kintamieji masyvai - grąžinti masyvų ilgių sumą. Jei suma nelyginė - grąžinti tekstą, kad suma nelyginė.
+echo '<br> <b>Trisdešimt devintas</b> <br>';
+
+function evenSum ($a, $b) {
+    if (is_int($a) && is_int($b)){
+        $sum = $a+$b;
+        if ($sum%2==0) {
+            return $sum;
+        } else {
+            return 'Sum is odd.';
+        }
+    } elseif (is_array($a) && is_array($b)) {
+        $sum = count($a)+count($b);
+        if ($sum%2==0) {
+            return $sum;
+        } else {
+            return 'Sum is odd.';
+        }
+    } else {
+        return 'ERROR - Inputs must be arrays or numbers!';
+    }
+}
+
+// 40. Funkcija turi priimti du kintamuosius. Vienas turi būti skaičius, kitas masyvas su skaičiais ir minimum 7 elementais. Funkcija turi grąžinti true, jei skaičius yra masyve, ir false, jei nėra tokio skaičiaus masyve.
+echo '<br> <b>Keturiasdešimtas</b> <br>';
+
+function inArray($num, $array) {
+    if (is_int($num) && count($array)>6) {
+        foreach ($array as $value) {
+            if ($num == $value) {
+                return true;
+            }
+        }
+        return false;
+    } else {
+        return 'ERROR - Inputs must be a number and array with minimum of 7 numbers!';
+    }
+}
+
+// 41. Parašyti funkciją, kuri priimtų vieną kintamąjį. Atliktų testą ar kintamasis yra tekstas. Išvestų tekstą į ekraną „<p>“ tag‘e.
+echo '<br> <b>Keturiasdešimt pirmas</b> <br>';
+
+function string ($string) {
+    if (is_string($string)) {
+        return "<p>$string</p>";
+    } else {
+        return 'ERROR - Inputs must be a string';
+    }
+}
+
+echo string('12');
+
+// 42. Parašyti funkciją, kuri priimtų vieną kintamąjį. Atliktų testą ar kintamasis yra tekstas. Funkcija turi išvesti tekstą į ekraną ir dar papildomai parodyti jo ilgį.
+echo '<br> <b>Keturiasdešimt antras</b> <br>';
+
+function lenght ($string) {
+    if (is_string($string)) {
+        return $string.' - '.strlen($string).' symbols.';
+    } else {
+        return 'ERROR - Inputs must be a string';
+    }
+}
+
+// 43. Parašyti funkciją, kuri priimtų vieną kintamąjį. Atliktų testą ar kintamasis yra tekstas. Jei teksto ilgis lyginis – tekstą išvestų žalios spalvos, jei nelyginis – mėlynos.
+echo '<br> <b>Keturiasdešimt trečias</b> <br>';
+
+function colored ($string) {
+    if (is_string($string)){
+        if (strlen($string)%2==0) {
+            return '<font color="green">'.$string.'<font>';
+        } else {
+            return '<font color="blue">'.$string.'<font>';
+        }
+    } else {
+        return 'ERROR - Inputs must be a string';
+    }
+}
+
+// 44. Parašyti funkciją, kuri priimtų vieną kintamąjį. Atliktų testą ar kintamasis yra tekstas. Funkcija turi atspausdinti tekstą, kur mažosios raidės pakeistos į didžiasias ir atvirkščiai.
+echo '<br> <b>Keturiasdešimt ketvirtas</b> <br>';
+function transform ($string) {
+    if (is_string($string)) {
+        $transformed = '';
+        for ($i=0; $i<strlen($string); $i++) {
+            if (ctype_upper($string[$i])) {
+                $transformed[$i]=strtolower($string[$i]);
+            } else {
+                $transformed[$i]=strtoupper($string[$i]);
+            }
+        }
+        return $transformed;
+    } else {
+        return 'ERROR - Inputs must be a string';
+    }
+}
+
+// 45. Parašyti funkciją, kuri priimtų vieną kintamąjį. Atliktų testą ar kintamasis yra tekstas. Jei kintamasis yra tekstas, jo ilgis turi būti daugiau, kaip 20 simbolių. Suskaičiuoti, kiek tekste yra ‚a‘ raidžių.
+echo '<br> <b>Keturiasdešimt penktas</b> <br>';
+
+function countA ($string) {
+    if (is_string($string) && strlen($string)>20) {
+        $count=0;
+        for ($i=0; $i<strlen($string); $i++) {
+            if ($string[$i]=='a' || $string[$i]=='A') {
+                $count++;
+            }
+        }
+        return $count;
+    } else {
+        return 'ERROR - Inputs must be a string with more than 20 symbols';
+    }
+}
+
+// 46. Parašyti funkciją, kuri priimtų vieną kintamąjį. Atliktų testą ar kintamasis yra tekstas. Suskaičiuoti kiek tekste yra mažųjų ir kiek didžiųjų raidžių.
+echo '<br> <b>Keturiasdešimt šeštas</b> <br>';
+function upperLower ($string) {
+    if (is_string($string)) {
+        $upper = 0;
+        $lower = 0;
+        for ($i=0; $i<strlen($string); $i++) {
+            if (ctype_lower($string[$i]) && $string[$i]!=' ') {
+                $lower++;
+            } elseif ((ctype_upper($string[$i]) && $string[$i]!=' ')) {
+                $upper++;
+            }
+        }
+        return "Uppercase letters - $upper, lowercase letters - $lower.";
+    } else {
+        return 'ERROR - Inputs must be a string';
+    }
+}
+
+// 47. Parašyti funkciją, kuri priimtų du kintamuosius. Atliktų testą ar kintamieji yra tekstai. Palyginti kuris tekstas yra ilgesnis.
+echo '<br> <b>Keturiasdešimt septintas</b> <br>';
+function longer ($string1, $string2) {
+    if (is_string($string1) && is_string($string2)) {
+        if (strlen($string1)>strlen($string2)) {
+            return "$string1 is longer";
+        } else {
+            return "$string2 is longer";
+        }
+    } else {
+        return 'ERROR - Inputs must be a string';
+    }
+}
+
+// 48. Parašyti funkciją, kuri priimtų du kintamuosius. Atliktų testą ar kintamieji yra tekstai. Palyginti kuris tekstas yra turi daugiau didžiųjų raidžių.
+echo '<br> <b>Keturiasdešimt aštuntas</b> <br>';
+function moreUpper ($string1, $string2) {
+    if (is_string($string1) && is_string($string2)){
+        $count1=$count2=0;
+        for ($i=0; $i<strlen($string1); $i++){
+            if (ctype_upper($string1[$i]) && $string1[$i]!=' ') {
+                $count1++;
+            }
+        }
+        for ($i=0; $i<strlen($string2); $i++){
+            if (ctype_upper($string2[$i]) && $string2[$i]!=' ') {
+                $count2++;
+            }
+        }
+        if ($count1>$count2){
+            return "$string1 have more uppercase letters.";
+        } else {
+            return "$string2 have more uppercase letters.";
+        }
+    } else {
+        return 'ERROR - Inputs must be a string';
+    }
+}
+
+// 49. Parašyti funkciją, kuri priimtų vieną kintamąjį. Atliktų testą ar kintamasis yra tekstas. Funckija turi grąžinti tekstą, kur žodžiai būtų sukeisti vietomis, tai yra pirmas žodis taptų paskutinis, antras – priešpaskutinis ir t.t. Pačių žodžių keisti nereikia.
+echo '<br> <b>Keturiasdešimt devintas</b> <br>';
+function change ($string) {
+    if (is_string($string)) {
+        $array = explode(' ', $string);
+        $reversed = array_reverse($array);
+        $changed = implode(' ', $reversed);
+        return $changed;
+    } else {
+        return 'ERROR - Input must be a string.';
+    }
+}
+
+// 50. Parašyti funkciją, kuri priimtų vieną kintamąjį. Atliktų testą ar kintamasis yra tekstas. Kiekvienam simboliui sugeneruoti atsitiktinę spalvą ir atvaizduoti pagražintą spalvotą tekstą.
+echo '<br> <b>Penkiasdešimtas</b> <br>';
+function colorize ($string) {
+    if (is_string($string)) {
+        $letters = str_split($string, 1);        
+        $coloredLetters=[];
+        foreach ($letters as $letter){
+            $hex=substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+            array_push($coloredLetters, '<font color="#'.$hex.'">'.$letter.'</font>');
+        }
+        $colored = implode('', $coloredLetters);
+        return $colored;
+    } else {
+        return 'ERROR - Input must be a string.';
+    }
+}
+
+echo '<h1>'.colorize('Tekstas').'</h1>';
+
+
+
+
+
+
 
 ?>
+
+<!-- 
+$a = [1,8,2,66,69,14,25,712,1,2,5];
+var_dump($a);
+echo '<br>';
+for ($i = 0; $i < count($a); ++$i){
+    for($j = 0; $j < count($a); ++$j){
+        if (array_sum($a[$i]) < array_sum($a[$j])){
+            $temp = $a[$i];
+            $a[$i] = $a[$j];
+            $a[$j] = $temp;
+        }
+    }
+}
+
+var_dump($a); -->
