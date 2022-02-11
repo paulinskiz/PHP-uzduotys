@@ -5,8 +5,6 @@ for ($i=0; $i<4; $i++){
     echo rand(0, 100).'<br>';
 }
 
-
-
 // 2. Sugeneruoti keturis atsitiktinius skaičius nuo 0 iki 100. Išvesti juos į ekraną. Visus nelyginius skaičius padidinti dvigubai. Išvesti visus skaičius į ekraną.
 echo '<br> <b>Antras</b> <br>';
 $array = [];
@@ -21,7 +19,6 @@ for ($i=0; $i<4; $i++){
     }
     echo $array[$i].'<br>';
 }
-
 
 // 3. Sugeneruoti atsitiktinį skaičių nuo 1 iki 7. Atitinkamai pagal skaičių parašyti kokia tai savaitės diena.
 echo '<br> <b>Trečias</b> <br>';
@@ -97,21 +94,17 @@ for ($i=0; $i<=100; $i++){
 
 // 7. Išvesti į ekraną visus lyginius skaičius nuo 0 iki 200.
 echo '<br> <b>Septintas</b> <br>';
-$array2 = [];
-for ($i=0; $i<=200; $i++){
-    if ($i%2==0){
-        array_push($array2, $i);
-        echo "$i; ";
-    }
+for ($i=0; $i<=200; $i+=2){
+    echo "$i; ";
 }
 
 // 8. Septinto uždavinio sąlygoje atspausdintus skaičius „pataisyti“, kad dalūs iš 6 būtų atvaizduoti mėlynai.
 echo '<br> <b>Aštuntas</b> <br>';
-for ($i=0; $i<count($array2); $i++){
-    if ($array2[$i]%6==0){
-        echo '<font color="blue">'.$array2[$i].'</font>; ';
+for ($i=0; $i<=200; $i+=2){
+    if ($i%6==0){
+        echo "<font color='blue'>$i; </font>";
     } else {
-        echo $array2[$i].'; ';
+        echo "$i; ";
     }
 }
 
@@ -194,7 +187,7 @@ for ($i=0; $i<100; $i++){
 // 17. Sukurti atsitiktinio ilgio masyvą, nuo 40 iki 60, kurio reikšmės būtų skaičiai nuo 1 iki masyvo ilgio.
 echo '<br> <b>Septynioliktas</b> <br>';
 $array9 = [];
-for ($i=1; count($array9)<=rand(40, 60); $i++){
+for ($i=1; $i<rand(40, 60); $i++){
     array_push($array9, $i);
 }
 
@@ -283,9 +276,9 @@ for ($j=0; $j<100; $j++) {
 // 24. Sugeneruoti masyvą, kurio ilgis 100, o reikšmės – masyvai, kurių ilgis atsitiktinis nuo 5 iki 18, o reikšmės – atsitiktiniai skaičiai nuo 5 iki 30.
 echo '<br> <b>Dvidešimt ketvirtas</b> <br>';
 $arr4 = [];
-$rand4 = (rand(5, 18));
 for ($i=0; $i<100; $i++) {
     $masyvas4 = [];
+    $rand4 = (rand(5, 18));
     for ($j=0; $j<$rand4; $j++) {
         array_push($masyvas4, rand(5, 30));
     }
@@ -295,13 +288,13 @@ for ($i=0; $i<100; $i++) {
 // 25. Sugeneruoti masyvą, kurio ilgis 100, o reikšmės – masyvai, kurių ilgis atsitiktinis nuo 5 iki 18, o reikšmės – atsitiktiniai skaičiai nuo 5 iki 75. Surasti didžiausią skaičių visame didžiajame masyve.
 echo '<br> <b>Dvidešimt penktas</b> <br>';
 $arr5 = $masyvas5 = [];
-$rand5 = rand(5, 18);
 for ($i=0; $i<100; $i++) {
+    $masyvas5=[];
+    $rand5 = rand(5, 18);
     for ($j=0; $j<$rand5; $j++) {
         array_push($masyvas5, rand(5, 75));
     }
     array_push($arr5, $masyvas5);
-    $masyvas5=[];
 }
 $largest = [];
 foreach ($arr5 as $array) {
@@ -312,13 +305,13 @@ echo 'Didžiausias skaičius visame didžiajame masyve - '.max($largest);
 // 26. Sugeneruoti masyvą, kurio ilgis 100, o reikšmės – masyvai, kurių ilgis atsitiktinis nuo 5 iki 18, o reikšmės – atsitiktiniai skaičiai nuo 5 iki 75. Surasti mažiausią skaičių visame didžiajame masyve ir kiek kartų jis pasikartojo.
 echo '<br> <b>Dvidešimt šeštas</b> <br>';
 $arr6 = $masyvas6 = [];
-$rand6 = rand(5, 18);
 for ($i=0; $i<100; $i++) {
+    $masyvas6=[];
+    $rand6 = rand(5, 18);
     for ($j=0; $j<$rand6; $j++) {
         array_push($masyvas6, rand(5, 75));
     }
     array_push($arr6, $masyvas6);
-    $masyvas6=[];
 }
 $least = [];
 foreach ($arr6 as $array) {
@@ -392,9 +385,9 @@ echo '<br> <b>Trisdešimtas</b> <br>';
 $arrayAvg = array_sum($allInOne)/count($allInOne);
 $middle = 0;
 if (count($allInOne)%2!=0) {
-    $middle = $allInOne[ceil(count($allInOne)/2)];
+    $middle = $allInOne[floor(count($allInOne)/2)];
 } else {
-    $middle = ($allInOne[(count($allInOne))/2] + $allInOne[((count($allInOne))/2)+1])/2;
+    $middle = ($allInOne[(count($allInOne))/2] + $allInOne[((count($allInOne))/2)-1])/2;
 } 
 
 if ($arrayAvg > $middle) {
@@ -479,7 +472,7 @@ echo '<br> <b>Trisdešimt šeštas</b> <br>';
 function divisions($a) {
     if (is_int($a)) {
         $count=0;
-        for ($i=2; $i<$a; $i++) {
+        for ($i=2; $i<=sqrt($a); $i++) {
             if ($a%$i==0) {
                 $count++;
             }
@@ -499,21 +492,8 @@ function number ($a) {
             if (!is_int($value)) {
                 return 'ERROR - Input must be array with 10 numbers';
             }
-        }
-        $temp1 = '';
-        $temp2 = '';
-        $temp3 = '';
-        for ($i=0; $i<10; $i++) {
-            if ($i<3){
-                $temp1[$i]=$a[$i];
-            } elseif ($i<6){
-                $temp2[$i]=$a[$i];
-            } else {
-                $temp3[$i]=$a[$i];
-            }
-        }
-        $number = "($temp1) $temp2-$temp3";
-        return $number; 
+        }        
+        return "($a[0]$a[1]$a[2]) $a[3]$a[4]$a[5]-$a[6]$a[7]$a[8]$a[9]"; 
     } else {
         return 'ERROR - Input must be array with 10 numbers';
     }
@@ -675,8 +655,10 @@ function longer ($string1, $string2) {
     if (is_string($string1) && is_string($string2)) {
         if (strlen($string1)>strlen($string2)) {
             return "$string1 is longer";
-        } else {
+        } elseif (strlen($string1)<strlen($string2)) {
             return "$string2 is longer";
+        }   else {
+            return "$string1 ant $string2 are the same lenght";
         }
     } else {
         return 'ERROR - Inputs must be a string';
@@ -740,26 +722,4 @@ function colorize ($string) {
 
 echo '<h1>'.colorize('Tekstas').'</h1>';
 
-
-
-
-
-
-
 ?>
-
-<!-- 
-$a = [1,8,2,66,69,14,25,712,1,2,5];
-var_dump($a);
-echo '<br>';
-for ($i = 0; $i < count($a); ++$i){
-    for($j = 0; $j < count($a); ++$j){
-        if (array_sum($a[$i]) < array_sum($a[$j])){
-            $temp = $a[$i];
-            $a[$i] = $a[$j];
-            $a[$j] = $temp;
-        }
-    }
-}
-
-var_dump($a); -->
